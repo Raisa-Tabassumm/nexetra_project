@@ -21,6 +21,7 @@ class AppliedJobScreen extends StatelessWidget {
             const SizedBox(height: 16),
             buildJobCard("RoopKotha Skincare", "Promote skincare products on TikTok", "6000 Tk", "15 followers"),
           ],
+
         ),
       ),
     );
