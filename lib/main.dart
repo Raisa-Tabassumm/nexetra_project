@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nexetra_ui/splash.dart';
+import 'splash.dart';
 import 'home_screen.dart';
 
 void main() {
