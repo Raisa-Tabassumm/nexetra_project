@@ -1,53 +1,73 @@
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
+const ProfileScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
+      backgroundColor: Colors.white,
+
       appBar: AppBar(
-        title: Text("Influencer Profile"),
-        backgroundColor: Colors.pink[400],
+        title: const Text("Influencer Profile"),
+        backgroundColor: Colors.indigo,
       ),
 
       body: Column(
 
         mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
 
         children: <Widget>[
 
-          SizedBox(height: 20.0),
+          const SizedBox(height: 10.0),
 
-          // Name
-          Text(
-            "Raisa Tabassum",
-            style: TextStyle(
-              fontSize: 26.0,
-              color: Colors.black,
+          // Profile Logo in Circular Shape (using Container)
+          Center(
+            child: Container(
+              width: 120.0,
+              height: 120.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(60.0),
+              ),
+              child: Image.asset("assets/splash.png"),
             ),
           ),
 
-          SizedBox(height: 10.0),
+         const  SizedBox(height: 10.0),
 
-          Text(
-            "Age: 23",
-            style: TextStyle(fontSize: 18.0),
+          // Name
+          Container(
+            margin: const EdgeInsets.all(15.0),
+            child: const Text(
+              "Raisa Tabassum",
+              style: TextStyle(
+                fontSize: 24.0,
+                color: Colors.black,
+              ),
+            ),
           ),
 
-          SizedBox(height: 20.0),
+          Container(
+            margin: const EdgeInsets.all(15.0),
+            child: const Text(
+              "Age: 23",
+              style: TextStyle(fontSize: 18.0),
+            ),
+          ),
 
           // Social Media Card
           Card(
-            margin: EdgeInsets.all(15.0),
+            margin: const EdgeInsets.all(15.0),
             color: Colors.grey[200],
             elevation: 5.0,
 
             child: Container(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
 
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
 
@@ -68,20 +88,23 @@ class ProfileScreen extends StatelessWidget {
 
           // Collaboration Info Card
           Card(
-            margin: EdgeInsets.all(15.0),
+            margin: const EdgeInsets.all(15.0),
             color: Colors.grey[200],
             elevation: 5.0,
 
             child: Container(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
 
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
 
                 children: <Widget>[
 
                   Text("Past Collaborations: 32"),
+                  SizedBox(height: 8.0),
+
+                  Text("Total Collaborations: 32"),
                   SizedBox(height: 8.0),
 
                   Text("Rating: 4.8 / 5"),
@@ -97,7 +120,7 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 20.0),
+          const SizedBox(height: 20.0),
 
           // Button Row
           Row(
@@ -107,12 +130,12 @@ class ProfileScreen extends StatelessWidget {
 
               ElevatedButton(
                 onPressed: () {},
-                child: Text("Edit Profile"),
+                child: const Text("Edit Profile"),
               ),
 
               ElevatedButton(
                 onPressed: () {},
-                child: Text("View Offers"),
+                child: const Text("View Offers"),
               ),
 
             ],
