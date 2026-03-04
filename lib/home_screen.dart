@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                 buildTopButton(Icons.person, "Profile", onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>  ProfileScreen()),
+                    MaterialPageRoute(builder: (context) =>  const ProfileScreen()),
                   );
                 }),
                 buildTopButton(Icons.dashboard, "Job Board", onTap: () {
@@ -84,7 +84,7 @@ class HomeScreen extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
               boxShadow: [
