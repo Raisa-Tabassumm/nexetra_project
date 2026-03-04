@@ -14,41 +14,32 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         elevation: 0,
-        toolbarHeight: 100,
-        title: const Text(
-          "Nexetra",
-          style: TextStyle(
-            fontSize: 24,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        foregroundColor: Colors.white,
-        actions: [
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              print("Selected: $value");
-            },
-            itemBuilder: (BuildContext context) {
-              return const [
-                PopupMenuItem(
-                  value: 'Contact Us',
-                  child: Text('Contact Us'),
-                ),
-                PopupMenuItem(
-                  value: 'About Us',
-                  child: Text('About Us'),
-                ),
-              ];
-            },
-          ),
-        ],
+        toolbarHeight: 0,
       ),
       body: Column(
         children: [
+          const SizedBox(height: 16),
+          // Small Logo
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Image.asset(
+              "assets/splash.png",
+              fit: BoxFit.contain,
+            ),
+          ),
+          const SizedBox(height: 16),
+          const Text(
+            "Nexetra",
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.indigo,
+            ),
+          ),
+          const SizedBox(height: 32),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -93,9 +84,16 @@ class HomeScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 4,
+                  offset: Offset(2,2),
+                ),
+              ],
             ),
             padding: const EdgeInsets.all(16),
-            child: Icon(icon, color: Colors.indigo),
+            child: Icon(icon, color: Colors.indigo, size: 28),
           ),
         ),
         const SizedBox(height: 8),
@@ -103,5 +101,4 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
-  // push test 2
 }
