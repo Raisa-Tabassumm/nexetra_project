@@ -53,14 +53,14 @@ class loginInfluencer extends StatelessWidget{
                       prefixIcon: Icon(Icons.email),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.green,
+                          color: Colors.black,
                           width: 2,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.lightGreenAccent,
-                          width: 4,
+                          color: Colors.black,
+                          width: 2,
                         )
                       )
                     ),
@@ -82,7 +82,8 @@ class loginInfluencer extends StatelessWidget{
                         ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.black38,
+                          color: Colors.black,
+                          width: 2,
                         )
                       )
                     ),
