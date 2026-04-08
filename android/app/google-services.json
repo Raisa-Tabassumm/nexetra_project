@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1038485012577",
+    "project_id": "nexetra-76ef5",
+    "storage_bucket": "nexetra-76ef5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038485012577:android:aa9099803f0388c7cfea20",
+        "android_client_info": {
+          "package_name": "com.example.nexetra_ui"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDil6Kjj8ROR8kRe45Ra-A6pkebJwHb74g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
