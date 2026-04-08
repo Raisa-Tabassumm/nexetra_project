@@ -1,7 +1,1 @@
-{
-  "auth": {
-    "providers": {
-      "emailPassword": true
-    }
-  }
-}
+{"flutter":{"platforms":{"android":{"default":{"projectId":"sd-project-ea697","appId":"1:931619223638:android:8b85ea3259a748f74863f7","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"sd-project-ea697","configurations":{"android":"1:931619223638:android:8b85ea3259a748f74863f7"}}}}}}
