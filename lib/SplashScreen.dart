@@ -1,42 +1,49 @@
-import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:splash_screen/Role.dart';
-import 'package:splash_screen/home_screen.dart';
-import 'package:splash_screen/loginInfluencer.dart';
+import 'dart:async';
+import 'home_screen.dart';
 
-class Splashscreen extends StatefulWidget {
+class SplashScreen extends StatefulWidget {
   @override
-  State<Splashscreen> createState() => _SplashscreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashscreenState extends State<Splashscreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 2), () {
-      User? user = FirebaseAuth.instance.currentUser;
-      if (user != null) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
-      } else {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => loginInfluencer()));
-      }
+
+
+    Timer(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.deepPurple,
       body: Center(
-        child: Container(
-            width: 400,
-            height: 200,
-            child: Center(child: Image.asset('asset/images/img_1.png'))),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/splash.png',
+              width: 140,
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              "Nexetra",
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
