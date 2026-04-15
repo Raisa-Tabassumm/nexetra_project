@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
 
@@ -10,10 +9,33 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  // Simple controllers for text fields
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController bioController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCurrentData();
+  }
+
+  Future<void> _loadCurrentData() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      if (user.displayName != null) {
+        nameController.text = user.displayName!;
+      }
+      try {
+        DocumentSnapshot doc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+        if (doc.exists) {
+          bioController.text = doc.get('bio') ?? '';
+        }
+      } catch (e) {
+
+      }
+    }
+  }
 
   @override
   void dispose() {
@@ -28,26 +50,21 @@ class _EditProfileState extends State<EditProfile> {
       User? user = FirebaseAuth.instance.currentUser;
 
       if (user != null) {
-        // 1. Update Name in Firebase Auth
+
         if (nameController.text.isNotEmpty) {
           await user.updateDisplayName(nameController.text);
           await user.reload();
         }
 
-        // 2. Update Password in Firebase Auth
+
         if (passwordController.text.isNotEmpty) {
           await user.updatePassword(passwordController.text);
         }
 
-        // 3. Update Bio
-        // NOTE: Firebase Auth user object does NOT have a dedicated "bio" field.
-        // To store the bio permanently, you will typically need to use Cloud Firestore.
-        // Example for Firestore:
-        // if (bioController.text.isNotEmpty) {
-        //   await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
-        //     'bio': bioController.text
-        //   });
-        // }
+
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+          'bio': bioController.text
+        }, SetOptions(merge: true));
 
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -119,7 +136,7 @@ class _EditProfileState extends State<EditProfile> {
 
           ElevatedButton(
             onPressed: () {
-              // Call the save changes function
+
               _saveChanges();
             },
             style: ElevatedButton.styleFrom(

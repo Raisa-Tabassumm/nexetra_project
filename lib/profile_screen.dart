@@ -1,11 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'loginInfluencer.dart';
 import 'SettingsScreen.dart';
-import 'edit_profile.dart';
+import 'home_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String _name = "Loading...";
+  String _bio = "Loading...";
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  Future<void> _loadUserData() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      if (mounted) {
+        setState(() {
+          _name = user.displayName ?? "No Name";
+        });
+      }
+      try {
+        var doc = await FirebaseFirestore.instance.collection('users').doc(user.uid).get();
+        if (doc.exists && mounted) {
+          setState(() {
+            _bio = doc.data()?['bio'] ?? "No bio available.";
+          });
+        } else if (mounted) {
+          setState(() {
+            _bio = "No bio available.";
+          });
+        }
+      } catch (e) {
+        if (mounted) {
+          setState(() {
+            _bio = "Failed to load bio.";
+          });
+        }
+      }
+    } else {
+      if (mounted) {
+        setState(() {
+          _name = "Not Logged In";
+          _bio = "Please log in.";
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +90,14 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.edit, color: Colors.indigo),
-              title: const Text('Edit Profile', style: TextStyle(fontSize: 16)),
+              leading: const Icon(Icons.home, color: Colors.indigo),
+              title: const Text('Home', style: TextStyle(fontSize: 16)),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(
+                Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const EditProfile()),
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  (Route<dynamic> route) => false,
                 );
               },
             ),
@@ -191,9 +243,9 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "David Adam",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87),
+                  Text(
+                    _name,
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black87),
                   ),
                   const SizedBox(height: 6),
                   const Text(
@@ -239,11 +291,11 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   RichText(
-                    text: const TextSpan(
-                      style: TextStyle(color: Colors.black87, fontSize: 15, height: 1.5),
+                    text: TextSpan(
+                      style: const TextStyle(color: Colors.black87, fontSize: 15, height: 1.5),
                       children: [
                         TextSpan(
-                          text:  "Hi. It's me.",
+                          text: _bio,
                         ),
                       ],
                     ),
